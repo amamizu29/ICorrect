@@ -2,5 +2,58 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="primaryColor">#cc0000</color>
+    <color name="primaryColorDark">#cc0000</color>
+    <color name="colorAccent">#4CAF50</color>
+    <color name="colorTextPrimary">#212121</color>
+    <color name="colorTextSecondary">#727272</color>
+
+    <color name="black">#000000</color>
+    <color name="gray">#BEBEBE</color>
+    <color name="gray_transparent">#D9BEBEBE</color>
+    <color name="gray_21">#363636</color>
+    <color name="white">#ffffff</color>
+    <color name="white_transparent">#B2FFFFFF</color>
+    <color name="red">#CC0000</color>
+    <color name="orange">#FFCC33</color>
+    <color name="red_simi">#FF3030</color>
+    <color name="red_simi_press">#EE2C2C</color>
+    <color name="black_transparent">#A6000000</color>
+    <color name="blue">#0000AA</color>
+    <color name="black_semi_transparent">#B3000000</color>
+    <color name="background">#e5e5e5</color>
+    <color name="half_black">#808080</color>
+    <color name="half_black_transparent">#A6808080</color>
+    <color name="white_pressed">#f1f1f1</color>
+    <color name="pink">#e91e63</color>
+    <color name="pink_pressed">#ec407a</color>
+    <color name="blue_semi">#5677fc</color>
+    <color name="blue_vimeo">#1ab7ea</color>
+    <color name="blue_facebook">#3b5997</color>
+    <color name="blue_semi_pressed">#738ffe</color>
+    <color name="blue_semi_transparent">#805677fc</color>
+    <color name="blue_semi_transparent_pressed">#80738ffe</color>
+    <color name="material_purple_500">#E74C3C</color>
+    <color name="material_light_yellow_800">#f8a822</color>
+    <color name="material_yellow_50">#fdf7e2</color>
+    <color name="accent">#40C4FF</color>
+    <color name="white_smoke">#F5F5F5</color>
+    <color name="apptheme_color">#33b5e5</color>
+    <color name="green">#79b74f</color>
+    <color name="purpose_green">#11A107</color>
+    <color name="news_color">#06bd6d</color>
+    <color name="orange4">#ebaa43</color>
+    <color name="orange2">#EE7600</color>
+    <!--===========================================================-->
+    <!--Indigo 500-->
+    <color name="primary_500">#3F51B5</color>
+    <!--Indigo 700-->
+    <color name="primary_700">#303F9F</color>
+    <!--Pink 500-->
+    <color name="accent_500">#E91E63</color>
+    <!--Pink 700-->
+    <color name="accent_700">#C2185B</color>
+    <color name="black_trans80">#33000000</color>
+
+
 </resources>
