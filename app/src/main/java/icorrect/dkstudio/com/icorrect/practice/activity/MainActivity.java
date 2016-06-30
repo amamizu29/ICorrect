@@ -1,6 +1,7 @@
 package icorrect.dkstudio.com.icorrect.practice.activity;
 
 import android.content.res.Configuration;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.design.widget.NavigationView;
@@ -77,6 +78,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
     }
+
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
+        menuItem.setChecked(true);
+        mSelectedId=menuItem.getItemId();
+        itemSelection(mSelectedId);
+        return true;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        //save selected item so it will remains same even after orientation change
+        outState.putInt("SELECTED_ID",mSelectedId);
+    }
+
 
 
     @Override
