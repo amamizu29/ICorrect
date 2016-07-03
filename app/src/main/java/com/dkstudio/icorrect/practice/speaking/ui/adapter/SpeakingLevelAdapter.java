@@ -1,11 +1,14 @@
 package com.dkstudio.icorrect.practice.speaking.ui.adapter;
 
+import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.dkstudio.icorrect.R;
+import com.dkstudio.icorrect.practice.speaking.ui.fragment.SpeakingLevelFragment;
 import com.dkstudio.icorrect.practice.speaking.ui.model.SpeakingLevelModel;
 
 import java.util.List;
@@ -16,21 +19,25 @@ import java.util.List;
 public class SpeakingLevelAdapter extends RecyclerView.Adapter<SpeakingLevelAdapter.MyViewHolder>
 {
     public List<SpeakingLevelModel> speakingLevelModelList;
+    Context context;
 
-    public SpeakingLevelAdapter(List<SpeakingLevelModel> speakingLevelModelList)
+    public SpeakingLevelAdapter(List<SpeakingLevelModel> speakingLevelModelList,Context context)
     {
         this.speakingLevelModelList = speakingLevelModelList;
+        this.context=context;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder
     {
         public TextView tvTitle, tvDescription;
+        public CardView cardView;
 
         public MyViewHolder(View view)
         {
             super(view);
             tvTitle = (TextView) view.findViewById(R.id.tvTitle);
             tvDescription = (TextView) view.findViewById(R.id.tvDescription);
+            cardView = (CardView) view.findViewById(R.id.card_view);
         }
     }
 
@@ -48,6 +55,14 @@ public class SpeakingLevelAdapter extends RecyclerView.Adapter<SpeakingLevelAdap
         SpeakingLevelModel speakingLevelModel = speakingLevelModelList.get(position);
         holder.tvTitle.setText(speakingLevelModel.getTitle());
         holder.tvDescription.setText(speakingLevelModel.getDescription());
+        holder.cardView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+
+            }
+        });
     }
 
     @Override

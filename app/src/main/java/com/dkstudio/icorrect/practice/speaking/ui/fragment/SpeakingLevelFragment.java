@@ -49,7 +49,7 @@ public class SpeakingLevelFragment extends Fragment
         speakingLevelModelList.add(new SpeakingLevelModel("Part III", "You have a longer discussion on the topic. The examiner will ask you further questions connected to the topic in Part 2."));
         speakingLevelModelList.add(new SpeakingLevelModel("Part II & III", "You will take test of part 2 and part 3 with same topic"));
         speakingLevelModelList.add(new SpeakingLevelModel("Full Test", "You will test all of parts in IELST Speaking. During this test, you can stop and reanswer question."));
-        speakingLevelAdapter = new SpeakingLevelAdapter(speakingLevelModelList);
+        speakingLevelAdapter = new SpeakingLevelAdapter(speakingLevelModelList,getActivity().getApplicationContext());
 
         recyclerView = (RecyclerView) view.findViewById(R.id.speakingLevelRecyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());

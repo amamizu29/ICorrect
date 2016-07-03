@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -65,17 +67,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void itemSelection(int mSelectedId)
     {
-
+        Fragment fragment = null;
+        Class fragmentClass = null;
 
         switch (mSelectedId)
         {
 
             case R.id.navigation_item_home:
-                goHomeScreen();
+                fragmentClass = SpeakingLevelFragment.class;
+                toolbar.setTitle(getString(R.string.speaking_practice));
                 break;
 
             case R.id.navigation_item_about:
-                goAboutScreen();
+                fragmentClass = AboutFragment.class;
+                toolbar.setTitle(getString(R.string.about_me));
                 break;
 
             case R.id.navigation_sub_item_rate:
@@ -87,17 +92,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 goToStore();
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 break;
-
         }
-
-    }
-
-    private void goAboutScreen()
-    {
-        getSupportFragmentManager().beginTransaction().
-                replace(R.id.frame_content, AboutFragment.instance("About Screen"))
-                .commit();
-        toolbar.setTitle(getString(R.string.about_me));
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.frame_content, fragment).commit();
         mDrawerLayout.closeDrawer(GravityCompat.START);
     }
 
