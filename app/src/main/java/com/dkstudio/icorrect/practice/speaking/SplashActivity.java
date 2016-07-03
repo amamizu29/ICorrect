@@ -1,11 +1,11 @@
-package icorrect.dkstudio.com.icorrect.practice.activity;
+package com.dkstudio.icorrect.practice.speaking;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 
-import icorrect.dkstudio.com.icorrect.R;
+import com.dkstudio.icorrect.R;
 
 /**
  * Created by Administrator on 30/06/2016.

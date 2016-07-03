@@ -10,4 +10,6 @@
     <string name="drawer_close">Close</string>
     <string name="other_action">Others</string>
     <string name="sign_out">Sign Out</string>
+    <string name="speaking_practice">Speaking Practice</string>
+    <string name="about_me">About Me</string>
 </resources>

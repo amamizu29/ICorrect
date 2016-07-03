@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".practice.activity.MainActivity">
+    tools:context=".practice.speaking.MainActivity">
     <group android:checkableBehavior="single">
        <item android:id="@+id/navigation_item_home"
            android:icon="@drawable/ic_action_home"
