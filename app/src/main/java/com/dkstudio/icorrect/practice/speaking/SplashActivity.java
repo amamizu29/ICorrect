@@ -10,19 +10,24 @@ import com.dkstudio.icorrect.R;
 /**
  * Created by Administrator on 30/06/2016.
  */
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity
+{
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        new CountDownTimer(3000, 1000) {
+        new CountDownTimer(3000, 1000)
+        {
             @Override
-            public void onTick(long millisUntilFinished) {
+            public void onTick(long millisUntilFinished)
+            {
 
             }
 
             @Override
-            public void onFinish() {
+            public void onFinish()
+            {
                 Intent i = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(i);
                 finish();

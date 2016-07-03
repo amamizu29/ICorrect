@@ -21,7 +21,8 @@ import com.dkstudio.icorrect.R;
 import com.dkstudio.icorrect.practice.speaking.ui.fragment.AboutFragment;
 import com.dkstudio.icorrect.practice.speaking.ui.fragment.SpeakingLevelFragment;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
+{
     @Bind(R.id.toolbar)
     public Toolbar toolbar;
 
@@ -35,7 +36,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public int mSelectedId;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
@@ -52,17 +54,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         goHomeScreen();
     }
 
-    private void setToolbar() {
+    private void setToolbar()
+    {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if (toolbar != null) {
+        if (toolbar != null)
+        {
             setSupportActionBar(toolbar);
         }
     }
 
-    private void itemSelection(int mSelectedId) {
+    private void itemSelection(int mSelectedId)
+    {
 
 
-        switch (mSelectedId) {
+        switch (mSelectedId)
+        {
 
             case R.id.navigation_item_home:
                 goHomeScreen();
@@ -98,20 +104,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void goHomeScreen()
     {
         getSupportFragmentManager().beginTransaction().
-                 replace(R.id.frame_content, SpeakingLevelFragment.instance())
+                replace(R.id.frame_content, SpeakingLevelFragment.instance())
                 .commit();
         toolbar.setTitle(getString(R.string.speaking_practice));
         mDrawerLayout.closeDrawer(GravityCompat.START);
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(Configuration newConfig)
+    {
         super.onConfigurationChanged(newConfig);
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem menuItem) {
+    public boolean onNavigationItemSelected(MenuItem menuItem)
+    {
         menuItem.setChecked(true);
         mSelectedId = menuItem.getItemId();
         itemSelection(mSelectedId);
@@ -119,7 +127,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState)
+    {
         super.onSaveInstanceState(outState, outPersistentState);
         //save selected item so it will remains same even after orientation change
         outState.putInt("SELECTED_ID", mSelectedId);
@@ -138,7 +147,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    public void goToStore(){
+    public void goToStore()
+    {
         try
         {
             startActivity(new Intent("android.intent.action.VIEW", Uri.parse("market://search?q=pub:SoftForLife")));

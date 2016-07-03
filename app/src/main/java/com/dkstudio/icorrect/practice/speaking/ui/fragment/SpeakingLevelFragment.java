@@ -20,35 +20,39 @@ import java.util.List;
 /**
  * Created by Administrator on 02/07/2016.
  */
-public class SpeakingLevelFragment extends Fragment {
+public class SpeakingLevelFragment extends Fragment
+{
 
     RecyclerView recyclerView;
     SpeakingLevelAdapter speakingLevelAdapter;
     List<SpeakingLevelModel> speakingLevelModelList;
 
-    public static SpeakingLevelFragment instance() {
+    public static SpeakingLevelFragment instance()
+    {
         SpeakingLevelFragment speakingLevelFragment = new SpeakingLevelFragment();
         return speakingLevelFragment;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         return inflater.inflate(R.layout.home_fragment, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
+    {
         //TODO fake data
-        speakingLevelModelList=new ArrayList<>();
-        speakingLevelModelList.add(new SpeakingLevelModel("Part I","You answer questions about yourself, your family, your work and your interests."));
-        speakingLevelModelList.add(new SpeakingLevelModel("Part II","You speak about a topic. You will be given a task card which asks you to speak about a particular topic and includes points that you can cover in your talk. You will be given 1 minute to prepare your talk. You will then speak for 1-2 minutes."));
-        speakingLevelModelList.add(new SpeakingLevelModel("Part III","You have a longer discussion on the topic. The examiner will ask you further questions connected to the topic in Part 2."));
-        speakingLevelModelList.add(new SpeakingLevelModel("Part II & III","You will take test of part 2 and part 3 with same topic"));
-        speakingLevelModelList.add(new SpeakingLevelModel("Full Test","You will test all of parts in IELST Speaking. During this test, you can stop and reanswer question."));
-        speakingLevelAdapter=new SpeakingLevelAdapter(speakingLevelModelList);
+        speakingLevelModelList = new ArrayList<>();
+        speakingLevelModelList.add(new SpeakingLevelModel("Part I", "You answer questions about yourself, your family, your work and your interests."));
+        speakingLevelModelList.add(new SpeakingLevelModel("Part II", "You speak about a topic. You will be given a task card which asks you to speak about a particular topic and includes points that you can cover in your talk. You will be given 1 minute to prepare your talk. You will then speak for 1-2 minutes."));
+        speakingLevelModelList.add(new SpeakingLevelModel("Part III", "You have a longer discussion on the topic. The examiner will ask you further questions connected to the topic in Part 2."));
+        speakingLevelModelList.add(new SpeakingLevelModel("Part II & III", "You will take test of part 2 and part 3 with same topic"));
+        speakingLevelModelList.add(new SpeakingLevelModel("Full Test", "You will test all of parts in IELST Speaking. During this test, you can stop and reanswer question."));
+        speakingLevelAdapter = new SpeakingLevelAdapter(speakingLevelModelList);
 
-        recyclerView= (RecyclerView) view.findViewById(R.id.speakingLevelRecyclerView);
-        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getActivity().getApplicationContext());
+        recyclerView = (RecyclerView) view.findViewById(R.id.speakingLevelRecyclerView);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(speakingLevelAdapter);
