@@ -2,6 +2,14 @@
     <string name="app_name">ICorrect</string>
     <string name="action_settings">Settings</string>
     <string name="app_home">Home</string>
+    <string name="tutorials" >Tutorials</string>
+
+
+    <string name="comunity_sharing">Comunity Sharing</string>
+    <string name="practice">Practice</string>
+    <string name="my_order">My Order</string>
+    <string name="my_practice">My practice</string>
+    <string name="free_coin">Free Coin</string>
     <string name="app_about">About Us</string>
     <string name="app_tutorials" >Tutorials</string>
     <string name="rate_app">Rate App</string>

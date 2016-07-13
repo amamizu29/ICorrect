@@ -3,24 +3,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".practice.speaking.MainActivity">
     <group android:checkableBehavior="single">
-       <item android:id="@+id/navigation_item_home"
-           android:icon="@drawable/ic_action_home"
-           android:title="@string/app_home"/>
-        <item android:id="@+id/navigation_item_about"
+        <item
+            android:id="@+id/nav_item_home"
+            android:icon="@drawable/ic_action_home"
+            android:title="@string/app_home" />
+        <item
+            android:id="@+id/nav_item_comunity_sharing"
             android:icon="@drawable/ic_action_info"
-            android:title="@string/app_about"/>
-        <item   android:id="@+id/navigation_subheader"
+            android:title="@string/comunity_sharing" />
+
+        <item
+            android:id="@+id/nav_sub_practice"
+            android:title="@string/practice">
+            <menu>
+                <item
+                    android:id="@+id/nav_item_my_order"
+                    android:icon="@drawable/ic_image_looks_one"
+                    android:title="@string/my_order" />
+                <item
+                    android:id="@+id/nav__item_my_practice"
+                    android:icon="@drawable/ic_image_looks_two"
+                    android:title="@string/my_practice" />
+
+            </menu>
+        </item>
+        <item
+            android:id="@+id/navigation_sub_header"
             android:title="@string/other_action">
             <menu>
-                <item android:id="@+id/navigation_sub_item_rate"
-                android:title="@string/rate_app"
-                android:icon="@drawable/ic_image_looks_one"/>
-                <item android:id="@+id/navigation_sub_item_other_app"
-                android:title="@string/more_app"
-                android:icon="@drawable/ic_image_looks_two"/>
-                <item android:id="@+id/navigation_sub_item_sign_out"
-                    android:title="@string/sign_out"
-                    android:icon="@drawable/ic_image_looks_two"/>
+                <item
+                        android:id="@+id/nav_sub_tutorials"
+                        android:icon="@drawable/ic_image_looks_one"
+                        android:title="@string/tutorials" />
+                <item
+                    android:id="@+id/nav_item_free_coin"
+                    android:icon="@drawable/ic_image_looks_one"
+                    android:title="@string/free_coin" />
+
+
+                <item
+                    android:id="@+id/nav_item_sigout"
+                    android:icon="@drawable/ic_image_looks_two"
+                    android:title="@string/sign_out" />
             </menu>
         </item>
     </group>

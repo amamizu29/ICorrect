@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,8 +16,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
+import android.widget.ImageView;
+import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.dkstudio.icorrect.R;
@@ -33,6 +38,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Bind(R.id.drawer_layout)
     public DrawerLayout mDrawerLayout;
+
+    @Bind(R.id.imgAvatar)
+    public ImageView imgAvatar;
+
+    @Bind(R.id.tvName)
+    public TextView tvName;
+
+    @Bind(R.id.tvInfo)
+    public TextView tvInfo;
+
+    @Bind(R.id.btnSignin)
+    public Button btnSignin;
 
     public ActionBarDrawerToggle drawerToggle;
     public int mSelectedId;
@@ -51,11 +68,44 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout.setDrawerListener(drawerToggle);
         drawerToggle.syncState();
         //default it set first item as selected
-        mSelectedId = savedInstanceState == null ? R.id.navigation_item_home : savedInstanceState.getInt("SELECTED_ID");
+        mSelectedId = savedInstanceState == null ? R.id.nav_item_home : savedInstanceState.getInt("SELECTED_ID");
         itemSelection(mSelectedId);
         goHomeScreen();
     }
 
+    //ducnm start
+    //google signin start
+    //GoogleApiClient mGoogleApiClient;
+
+  /*  void initSignin() {
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this *//* FragmentActivity *//*, new GoogleApiClient.OnConnectionFailedListener() {
+                    @Override
+                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+                    }
+                } *//* OnConnectionFailedListener *//*)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
+        findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public09
+
+            void onClick(View v)
+            {
+                signIn();
+            }
+        });
+
+    }
+*/
+    //ducnm end
     private void setToolbar()
     {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -73,24 +123,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (mSelectedId)
         {
 
-            case R.id.navigation_item_home:
+            case R.id.nav_item_home:
                 fragmentClass = SpeakingLevelFragment.class;
                 toolbar.setTitle(getString(R.string.speaking_practice));
+
                 break;
 
-            case R.id.navigation_item_about:
+            case R.id.nav_item_comunity_sharing:
                 fragmentClass = AboutFragment.class;
-                toolbar.setTitle(getString(R.string.about_me));
+                toolbar.setTitle(getString(R.string.comunity_sharing));
+
+                break;
+            case R.id.nav_item_my_order:
+                toolbar.setTitle(getString(R.string.my_order));
+
+                break;
+            case R.id.nav__item_my_practice:
+                toolbar.setTitle(getString(R.string.my_practice));
+
+                break;
+            case R.id.nav_item_free_coin:
+                toolbar.setTitle(getString(R.string.my_practice));
+
                 break;
 
-            case R.id.navigation_sub_item_rate:
-                goToApp();
-                mDrawerLayout.closeDrawer(GravityCompat.START);
-                break;
 
-            case R.id.navigation_sub_item_other_app:
-                goToStore();
-                mDrawerLayout.closeDrawer(GravityCompat.START);
+
+            case R.id.nav_item_sigout:
+
                 break;
         }
         try {
