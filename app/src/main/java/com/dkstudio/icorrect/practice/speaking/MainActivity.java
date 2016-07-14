@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -17,16 +18,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.FrameLayout;
+import android.widget.*;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 
-import android.widget.ImageView;
-import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.dkstudio.icorrect.R;
 import com.dkstudio.icorrect.practice.speaking.ui.fragment.AboutFragment;
 import com.dkstudio.icorrect.practice.speaking.ui.fragment.SpeakingLevelFragment;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import io.realm.internal.Util;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
@@ -71,41 +79,118 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mSelectedId = savedInstanceState == null ? R.id.nav_item_home : savedInstanceState.getInt("SELECTED_ID");
         itemSelection(mSelectedId);
         goHomeScreen();
+        initSignin();
     }
 
     //ducnm start
     //google signin start
-    //GoogleApiClient mGoogleApiClient;
+    GoogleApiClient mGoogleApiClient;
+    int RC_SIGN_IN = 101;
 
-  /*  void initSignin() {
+    void initSignin()
+    {
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this *//* FragmentActivity *//*, new GoogleApiClient.OnConnectionFailedListener() {
+                .enableAutoManage(this /* FragmentActivity */, new GoogleApiClient.OnConnectionFailedListener()
+                {
                     @Override
-                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult)
+                    {
+
                     }
-                } *//* OnConnectionFailedListener *//*)
+                } /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener()
+        findViewById(R.id.btnSignin).setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public09
-
-            void onClick(View v)
+            public void onClick(View v)
             {
                 signIn();
             }
         });
 
     }
-*/
+
+    private void signIn()
+    {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    private void handleSignInResult(GoogleSignInResult result)
+    {
+
+        if (result.isSuccess())
+        {
+            // Signed in successfully, show authenticated UI.
+
+            final GoogleSignInAccount acct = result.getSignInAccount();
+            tvName.setText(acct.getDisplayName());
+            tvInfo.setText("you have 1000 coin");
+            btnSignin.setVisibility(View.GONE);
+            Toast.makeText(getBaseContext(), "Hello " + acct.getDisplayName(), Toast.LENGTH_SHORT).show();
+            // Util.showShortToast(MainActivity.this,   Util.showShortToast(MainActivity.this, "Hello " + acct.getDisplayName());
+            // );
+
+
+            //Toast.makeText(this, "hello" + acct.getPhotoUrl(), Toast.LENGTH_SHORT).show();
+            //updateUI(true);
+        }
+        else
+        {
+            // Signed out, show unauthenticated UI.
+            //updateUI(false);
+            Toast.makeText(getBaseContext(), "Signin fail ", Toast.LENGTH_SHORT).show();
+            // Util.showShortToast(this, "Please Try Again");
+            //Toast.makeText(this,, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void signOut()
+    {
+        try
+        {
+            Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                    new ResultCallback<Status>()
+                    {
+                        @Override
+                        public void onResult(Status status)
+                        {
+                            tvName.setText(R.string.default_name);
+                            tvInfo.setText(R.string.not_log_in);
+                            btnSignin.setVisibility(View.VISIBLE);
+                        }
+                    });
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
+    }
+
     //ducnm end
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        Toast.makeText(getBaseContext(), "Signin  " + requestCode, Toast.LENGTH_SHORT).show();
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN)
+        {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        }
+    }
+
     private void setToolbar()
     {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -144,24 +229,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_item_free_coin:
                 toolbar.setTitle(getString(R.string.my_practice));
-
                 break;
-
-
-
             case R.id.nav_item_sigout:
-
+                signOut();
                 break;
         }
-        try {
+        try
+        {
             fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.frame_content, fragment).commit();
-        mDrawerLayout.closeDrawer(GravityCompat.START);
+
+        if (fragment != null)
+        {
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.frame_content, fragment).commit();
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        }
+
     }
 
     private void goHomeScreen()
