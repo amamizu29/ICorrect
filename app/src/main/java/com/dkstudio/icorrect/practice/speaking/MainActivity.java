@@ -310,4 +310,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent("android.intent.action.VIEW", Uri.parse("http://play.google.com/store/search?q=pub:SoftForLife")));
         }
     }
+
 }
