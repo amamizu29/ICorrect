@@ -1,6 +1,5 @@
-package com.dkstudio.icorrect.practice.speaking;
+package com.dkstudio.icorrect.practice.speaking.ui.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -13,6 +12,7 @@ import com.dkstudio.icorrect.R;
  */
 public class SplashActivity extends AppCompatActivity
 {
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

@@ -1,12 +1,8 @@
 package com.dkstudio.icorrect.practice.speaking.ui.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.util.AttributeSet;
-import android.view.View;
 import com.dkstudio.icorrect.R;
 
 /**
@@ -25,5 +21,6 @@ public class SpeakingDetailFragment extends FragmentActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.speaking_detail_fragment);
+
     }
 }

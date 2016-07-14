@@ -56,4 +56,18 @@
     <color name="black_trans80">#33000000</color>
 
 
+    <color name="image_placeholder">#757575</color>
+    <color name="white_gray">#A8A8A8</color>
+    <color name="grey">#9E9E9E</color>
+    <color name="grey_translucent">#889E9E9E</color>
+    <color name="common_bg_color">#181818</color>
+    <color name="see_all_text">#EEEEEE</color>
+    <color name="channel_stroke">#383839</color>
+    <color name="common_bg_color_accent_translucent">#80181818</color>
+    <color name="bg_player_controller">#CC000000</color>
+    <color name="background_profile">#282828</color>
+    <color name="comment_input">#282828</color>
+    <color name="bg_schedule_selected">#282828</color>
+    <color name="more_text">#2196F3</color>
+
 </resources>

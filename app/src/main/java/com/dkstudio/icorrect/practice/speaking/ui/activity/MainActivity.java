@@ -1,4 +1,4 @@
-package com.dkstudio.icorrect.practice.speaking;
+package com.dkstudio.icorrect.practice.speaking.ui.activity;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
