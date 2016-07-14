@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 import butterknife.ButterKnife;
 import com.dkstudio.icorrect.R;
@@ -41,7 +42,7 @@ public class PlayVideoActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.play_video);
-        EventBus.getDefault().register(this);
+//        EventBus.getDefault().register(this);
         ButterKnife.bind(this);
 
         tvResultCode = (TextView) findViewById(R.id.txt_comp);
@@ -53,8 +54,7 @@ public class PlayVideoActivity extends Activity
             public void onResponse(Call<InteractQuestionDTO> call, Response<InteractQuestionDTO> response)
             {
                 InteractQuestionDTO interactQuestionDTO = response.body();
-                EventBus.getDefault().post(new QuestionEvent.GetInteractionQuestion(interactQuestionDTO));
-//                ImageUtils.loadImage(MainActivity.this, pojo.getAvatarUrl(), ivLogo, true);
+                showVideo(interactQuestionDTO);
             }
 
             @Override
@@ -62,14 +62,10 @@ public class PlayVideoActivity extends Activity
             {
             }
         });
-
-
     }
 
-
-    public void onEventMainThread(QuestionEvent.GetInteractionQuestion event) throws SQLException
+    public void showVideo(InteractQuestionDTO interactQuestionDTO)
     {
-        InteractQuestionDTO interactQuestionDTO = event.getInteractQuestionDTO();
         tvResultCode.setText(interactQuestionDTO.getResultCode() + "");
         tvCategory.setText(interactQuestionDTO.getCategoryId());
 
@@ -85,34 +81,50 @@ public class PlayVideoActivity extends Activity
 
         final CustomProgressDialog customProgressDialog = new CustomProgressDialog(this);
         customProgressDialog.show("");
-        MediaController videoControl = new MediaController(this);
-        videoControl.setAnchorView(videoView);
-        videoView.setMediaController(videoControl);
+
+        try
+        {
+            // Start the MediaController
+            MediaController mediacontroller = new MediaController(this);
+            mediacontroller.setAnchorView(videoView);
+            // Get the URL from String VideoURL
+            Uri video = Uri.parse(videoUrls.get(currentVideo));
+            videoView.setMediaController(mediacontroller);
+            videoView.setVideoURI(video);
+            videoView.requestFocus();
+
+        }
+        catch (Exception e)
+        {
+            Log.e("Error", e.getMessage());
+            e.printStackTrace();
+        }
+
         videoView.requestFocus();
-        currentVideo=0;
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener()
         {
-            @Override
+            // Close the progress bar and play the video
             public void onPrepared(MediaPlayer mp)
             {
                 customProgressDialog.dismiss("");
+                videoView.start();
+            }
+        });
+        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
+        {
+            @Override
+            public void onCompletion(MediaPlayer mp)
+            {
+                currentVideo++;
+                Toast.makeText(PlayVideoActivity.this, "done video -next video: " + currentVideo, Toast.LENGTH_SHORT).show();
+                if (currentVideo > videoUrls.size() - 1)
+                {
+                    videoView.stopPlayback();
+                    return;
+                }
                 playVideo(videoUrls.get(currentVideo));
             }
         });
-//        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
-//        {
-//            @Override
-//            public void onCompletion(MediaPlayer mp)
-//            {
-//                currentVideo++;
-//                Toast.makeText(MainActivity.this, "done video -next video: " + currentVideo, Toast.LENGTH_SHORT).show();
-//                if (currentVideo > videoUrls.size() - 1)
-//                {
-//                    videoView.stopPlayback();
-//                }
-//                playVideo(videoUrls.get(currentVideo));
-//            }
-//        });
     }
 
     private void playVideo(String urlVideo)
