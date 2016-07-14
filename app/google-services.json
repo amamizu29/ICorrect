@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "419862691783",
+    "project_id": "firebase-icorrect"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:419862691783:android:f9aa8b41e59e0406",
+        "android_client_info": {
+          "package_name": "com.dkstudio.icorrect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "419862691783-u8iqs9hh9p42svaqn6qm989neqc3o3u6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dkstudio.icorrect",
+            "certificate_hash": "4A99E172EFBA41ECA8EC00E5E5C684D29FCB6BD9"
+          }
+        },
+        {
+          "client_id": "419862691783-gp3a6non56qs1jqqsclabjg9dfp3ookm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpZhkIe7DEjHHksim4xuef_OUsAPhCmT8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
