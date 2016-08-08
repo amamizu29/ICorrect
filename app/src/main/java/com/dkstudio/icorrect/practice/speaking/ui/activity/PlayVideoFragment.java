@@ -1,9 +1,9 @@
 package com.dkstudio.icorrect.practice.speaking.ui.activity;
 
-import android.app.Activity;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.MediaController;
 import android.widget.TextView;
@@ -14,19 +14,16 @@ import com.dkstudio.icorrect.R;
 import com.dkstudio.icorrect.practice.speaking.dto.CategoryDTO;
 import com.dkstudio.icorrect.practice.speaking.dto.InteractQuestionDTO;
 import com.dkstudio.icorrect.practice.speaking.dto.QuestionDTO;
-import com.dkstudio.icorrect.practice.speaking.event.QuestionEvent;
 import com.dkstudio.icorrect.practice.speaking.service.ServiceBuilder;
 import com.dkstudio.icorrect.practice.speaking.ui.custom.CustomProgressDialog;
-import de.greenrobot.event.EventBus;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayVideoActivity extends Activity
+public class PlayVideoFragment extends FragmentActivity
 {
     String url = "https://api.github.com/users/mobilesiri";
 
@@ -42,7 +39,6 @@ public class PlayVideoActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.play_video);
-//        EventBus.getDefault().register(this);
         ButterKnife.bind(this);
 
         tvResultCode = (TextView) findViewById(R.id.txt_comp);
@@ -116,7 +112,7 @@ public class PlayVideoActivity extends Activity
             public void onCompletion(MediaPlayer mp)
             {
                 currentVideo++;
-                Toast.makeText(PlayVideoActivity.this, "done video -next video: " + currentVideo, Toast.LENGTH_SHORT).show();
+                Toast.makeText(PlayVideoFragment.this, "done video -next video: " + currentVideo, Toast.LENGTH_SHORT).show();
                 if (currentVideo > videoUrls.size() - 6)
                 {
                     videoView.stopPlayback();
