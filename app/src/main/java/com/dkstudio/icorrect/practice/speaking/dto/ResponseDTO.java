@@ -8,31 +8,18 @@ import java.io.Serializable;
  * Common response DTO
  */
 public class ResponseDTO<DTO> implements Serializable {
-    private String responseCode;
-
-    @SerializedName("data")
-    private DTO result;
-
+    @SerializedName("resultCode")
+    private int resultCode ;
+    @SerializedName("errorCode")
+    private int errorCode ;
+    @SerializedName("message")
     private String message;
+
+    @SerializedName("result")
+    private DTO data;
 
     public ResponseDTO() {
 
-    }
-
-    public DTO getResult() {
-        return result;
-    }
-
-    public void setResult(DTO result) {
-        this.result = result;
-    }
-
-    public String getResponseCode() {
-        return responseCode;
-    }
-
-    public void setResponseCode(String responseCode) {
-        this.responseCode = responseCode;
     }
 
     public String getMessage() {
@@ -41,6 +28,36 @@ public class ResponseDTO<DTO> implements Serializable {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public int getResultCode()
+    {
+        return resultCode;
+    }
+
+    public void setResultCode(int resultCode)
+    {
+        this.resultCode = resultCode;
+    }
+
+    public int getErrorCode()
+    {
+        return errorCode;
+    }
+
+    public void setErrorCode(int errorCode)
+    {
+        this.errorCode = errorCode;
+    }
+
+    public DTO getData()
+    {
+        return data;
+    }
+
+    public void setData(DTO data)
+    {
+        this.data = data;
     }
 }
 

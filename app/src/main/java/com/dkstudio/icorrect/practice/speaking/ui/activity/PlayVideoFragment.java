@@ -11,9 +11,7 @@ import android.widget.Toast;
 import android.widget.VideoView;
 import butterknife.ButterKnife;
 import com.dkstudio.icorrect.R;
-import com.dkstudio.icorrect.practice.speaking.dto.CategoryDTO;
-import com.dkstudio.icorrect.practice.speaking.dto.InteractQuestionDTO;
-import com.dkstudio.icorrect.practice.speaking.dto.QuestionDTO;
+import com.dkstudio.icorrect.practice.speaking.dto.*;
 import com.dkstudio.icorrect.practice.speaking.service.ServiceBuilder;
 import com.dkstudio.icorrect.practice.speaking.ui.custom.CustomProgressDialog;
 import retrofit2.Call;
@@ -29,7 +27,10 @@ public class PlayVideoFragment extends FragmentActivity
 
     public TextView tvResultCode;
     public TextView tvCategory;
-    VideoView videoView;
+    VideoView myVideo1;
+    MediaController mediaController1;
+    MediaController mediaController2;
+     CustomProgressDialog customProgressDialog;
 
     public int currentVideo = 0;
     public List<String> videoUrls = new ArrayList<>();
@@ -43,7 +44,7 @@ public class PlayVideoFragment extends FragmentActivity
 
         tvResultCode = (TextView) findViewById(R.id.txt_comp);
         tvCategory = (TextView) findViewById(R.id.txt_blog);
-        videoView = (VideoView) findViewById(R.id.myVideo);
+        myVideo1 = (VideoView) findViewById(R.id.myVideo1);
         ServiceBuilder.getService().getData().enqueue(new Callback<InteractQuestionDTO>()
         {
             @Override
@@ -56,6 +57,22 @@ public class PlayVideoFragment extends FragmentActivity
             @Override
             public void onFailure(Call<InteractQuestionDTO> call, Throwable t)
             {
+            }
+        });
+
+        ServiceBuilder.getService().getLogin().enqueue(new Callback<ResponseDTO<UserDTO>>()
+        {
+            @Override
+            public void onResponse(Call<ResponseDTO<UserDTO>> call, Response<ResponseDTO<UserDTO>> response)
+            {
+                ResponseDTO<UserDTO> result=response.body();
+                UserDTO userDTO=result.getData();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseDTO<UserDTO>> call, Throwable t)
+            {
+
             }
         });
     }
@@ -75,19 +92,15 @@ public class PlayVideoFragment extends FragmentActivity
             }
         }
 
-        final CustomProgressDialog customProgressDialog = new CustomProgressDialog(this);
-        customProgressDialog.show("");
-
         try
         {
             // Start the MediaController
-            MediaController mediacontroller = new MediaController(this);
-            mediacontroller.setAnchorView(videoView);
+            mediaController1 = new MediaController(this);
+            mediaController2 = new MediaController(this);
+
+            mediaController1.setAnchorView(myVideo1);
             // Get the URL from String VideoURL
-            Uri video = Uri.parse(videoUrls.get(currentVideo));
-            videoView.setMediaController(mediacontroller);
-            videoView.setVideoURI(video);
-            videoView.requestFocus();
+            prepareVideo(videoUrls.get(currentVideo),myVideo1,mediaController1);
 
         }
         catch (Exception e)
@@ -95,13 +108,26 @@ public class PlayVideoFragment extends FragmentActivity
             Log.e("Error", e.getMessage());
             e.printStackTrace();
         }
+        startVideo(myVideo1);
+    }
 
-        videoView.requestFocus();
+    private void prepareVideo(String urlVideo,VideoView myVideo,MediaController mediaController)
+    {
+        customProgressDialog = new CustomProgressDialog(this);
+        customProgressDialog.show("");
+        Uri video = Uri.parse(urlVideo);
+        myVideo.setMediaController(mediaController);
+        myVideo.setVideoURI(video);
+        myVideo.requestFocus();
+    }
+
+    private void startVideo(final VideoView videoView){
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener()
         {
             // Close the progress bar and play the video
             public void onPrepared(MediaPlayer mp)
             {
+//                mp.reset();
                 customProgressDialog.dismiss("");
                 videoView.start();
             }
@@ -119,6 +145,7 @@ public class PlayVideoFragment extends FragmentActivity
                     return;
                 }
                 playVideo(videoUrls.get(currentVideo));
+//                mp.release();
             }
         });
     }
@@ -127,8 +154,8 @@ public class PlayVideoFragment extends FragmentActivity
     {
         Log.i("url--------", urlVideo);
         Uri vidUri = Uri.parse(urlVideo);
-        videoView.setVideoURI(vidUri);
-        videoView.start();
+        myVideo1.setVideoURI(vidUri);
+        myVideo1.start();
     }
 
 }

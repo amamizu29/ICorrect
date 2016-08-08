@@ -26,11 +26,15 @@
                         android:background="#000000"
                         tools:context=".MainActivity" >
             <VideoView
-                    android:id="@+id/myVideo"
+                    android:id="@+id/myVideo1"
                     android:layout_width="300dp"
                     android:layout_height="300dp"
                     android:layout_centerInParent="true" />
-
+            <VideoView
+                    android:id="@+id/myVideo2"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
+                    android:layout_centerInParent="true" />
         </RelativeLayout>
         <ImageView
                 android:id="@+id/ivLogo"
