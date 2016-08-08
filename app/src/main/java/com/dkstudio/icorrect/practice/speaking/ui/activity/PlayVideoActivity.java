@@ -117,7 +117,7 @@ public class PlayVideoActivity extends Activity
             {
                 currentVideo++;
                 Toast.makeText(PlayVideoActivity.this, "done video -next video: " + currentVideo, Toast.LENGTH_SHORT).show();
-                if (currentVideo > videoUrls.size() - 1)
+                if (currentVideo > videoUrls.size() - 6)
                 {
                     videoView.stopPlayback();
                     return;
